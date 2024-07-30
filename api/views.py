@@ -1,13 +1,18 @@
+from django.http import response
 from django.shortcuts import render
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.serializers import Serializer
 from .models import Note
 from .serializers import NoteSerializer
+from api import serializers
 from .utils import updateNote
 from .utils import deleteNote
 from .utils import getNoteDetail
 from .utils import createNote
 from .utils import getNotesList
+
+
 # Create your views here.
 
 
@@ -58,6 +63,7 @@ def getRoutes(request):
 
 
 @api_view(['GET','POST'])
+
 def getNotes(request):
       if request.method == 'GET':
             return getNotesList(request)
@@ -66,6 +72,7 @@ def getNotes(request):
             
 
 @api_view(['GET','PUT','DELETE'])
+
 def getNote(request,pk):
       if request.method == 'GET':
             return getNoteDetail(request,pk)

@@ -1,6 +1,4 @@
 import React,{useEffect, useState} from 'react'
-//import ListItem from '../components/ListItem'
-//import notes from '../assets/data';
 import { useParams, useNavigate} from 'react-router-dom';
 import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg'
 
@@ -14,7 +12,7 @@ const NotePage = (props,history) => {
   useEffect(()=>{
     const getNote = async () => {
       try {
-        let response = await fetch(`/api/notes/${id}/`);
+        let response = await fetch(`api/notes/${id}/`); ///api/notes/${id}/
         if (response.ok) {
           let data = await response.json();
           setNote(data);
@@ -27,13 +25,15 @@ const NotePage = (props,history) => {
     };
 
     getNote();
+              //getNote();
   }, [id]);
 
   let createNote =async() =>{
-    await fetch(`/api/notes/`,{
+    await fetch(`/api/notes/`,{ ///api/notes/
       method:"POST",
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+       
       },
       body: JSON.stringify(note)
     })
@@ -41,10 +41,11 @@ const NotePage = (props,history) => {
 
 
   let updateNote =async() =>{
-    await fetch(`/api/notes/${id}/`,{
+    await fetch(`/api/notes/${id}/`,{ ///api/notes/${id}/
       method:"PUT",
       headers:{
         'Content-Type':'application/json'
+        
       },
       body: JSON.stringify(note)
     })
@@ -52,10 +53,11 @@ const NotePage = (props,history) => {
   }
 
   let deleteNote=async() =>{
-    await fetch(`/api/notes/${id}/`,{
+    await fetch(`/api/notes/${id}/`,{ ///api/notes/${id}/
       method:`DELETE`,
       headers:{
         'Content-Type':'application/json'
+      
       },
       body: JSON.stringify(note)
     })
@@ -83,7 +85,7 @@ const NotePage = (props,history) => {
   }
 
   let handleChange=(value) =>{
-    setNote(mote => ({...note,'body': value}))
+    setNote(note => ({...note,'body': value}))
     console.log("Handle Change:",note)
   }
 
@@ -98,7 +100,7 @@ const NotePage = (props,history) => {
         </h3>
         {id !== 'new' && <button onClick={deleteNote}>Delete</button>}
       </div>
-      <textarea onChange={(e)=> {handleChange(e.target.value)}} value={note.body}>
+      <textarea onChange={(e)=> {handleChange(e.target.value)}} value={note?.body}>
 
       </textarea>
       
@@ -108,3 +110,5 @@ const NotePage = (props,history) => {
 }
 
 export default NotePage
+
+

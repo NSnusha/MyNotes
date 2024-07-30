@@ -10,13 +10,12 @@ const NotesListPage = () => {
 
     useEffect(()=>{
         getNotes()
-    },[])
+    },[]);
 
     let getNotes = async() => {
 
-        let response=await fetch('/api/notes/')
+        let response=await fetch('/api/notes/') //''
         let data = await response.json()
-        console.log("data:",data);
         setNotes(data)
 
     } 
