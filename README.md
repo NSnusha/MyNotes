@@ -1,4 +1,4 @@
-# MyNotes
+# MyNotes React+Django
 ReactJS+Django Project
 
 
